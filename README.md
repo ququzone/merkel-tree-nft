@@ -1,4 +1,4 @@
-# solidity contracts template
+# Merkel tree NFT
 
 ## Local Development
 

@@ -31,19 +31,25 @@ contract MimoFirst1000 is ERC721 {
         claimedBitMap[claimedWordIndex] = claimedBitMap[claimedWordIndex] | (1 << claimedBitIndex);
     }
 
-    function claim(uint256 index, address account, bytes32[] calldata proof) external {
-        require(!isClaimed(index), 'MimoFirst1000: Drop already claimed.');
+    function claim(
+        uint256 index,
+        address account,
+        bytes32[] calldata proof
+    ) external {
+        require(!isClaimed(index), "MimoFirst1000: Drop already claimed.");
 
         // Verify the merkle proof.
         bytes32 node = keccak256(abi.encodePacked(index, account));
-        require(MerkleProofLib.verify(proof, merkleRoot, node), 'MimoFirst1000: Invalid proof.');
+        require(MerkleProofLib.verify(proof, merkleRoot, node), "MimoFirst1000: Invalid proof.");
 
         // Mark it claimed and send the token.
         _setClaimed(index);
         _mint(account, ++nextTokenId);
     }
 
-    function tokenURI(uint256 /*id*/) public view virtual override returns (string memory) {
+    function tokenURI(
+        uint256 /*id*/
+    ) public view virtual override returns (string memory) {
         return uri;
     }
 }

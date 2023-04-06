@@ -6,7 +6,7 @@ import "solmate/src/utils/MerkleProofLib.sol";
 
 contract MimoFirst1000 is ERC721 {
     string private uri;
-    uint256 private nextTokenId;
+    uint256 public nextTokenId;
     bytes32 public immutable merkleRoot;
 
     // This is a packed array of booleans.

@@ -44,7 +44,7 @@ contract MimoFirst1000 is ERC721 {
 
         // Mark it claimed and send the token.
         _setClaimed(index);
-        _mint(account, ++nextTokenId);
+        _safeMint(account, ++nextTokenId);
     }
 
     function tokenURI(

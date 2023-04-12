@@ -12,7 +12,7 @@ contract MimoFrenzyNFT is ERC721 {
     // This is a packed array of booleans.
     mapping(uint256 => uint256) private claimedBitMap;
 
-    constructor(bytes32 _root, string memory _uri) ERC721("Mimo Frenzy NFT", "MFNT") {
+    constructor(bytes32 _root, string memory _uri) ERC721("Mimo Frenzy Tribe - Pippi", "MFTP") {
         uri = _uri;
         merkleRoot = _root;
     }

@@ -152,28 +152,28 @@ contract MimoFrenzyNFTTest is Test {
 
         vm.prank(bob);
         vm.expectRevert("MimoFrenzyNFT: Too low mint fee.");
-        token.claim{value: 90 ether}();
+        token.mint{value: 90 ether}();
         assertEq(0, token.balanceOf(bob));
 
         vm.prank(bob);
-        token.claim{value: 99 ether}();
+        token.mint{value: 99 ether}();
         assertEq(1, token.balanceOf(bob));
 
         vm.prank(mike);
-        token.claim{value: 99 ether}();
+        token.mint{value: 99 ether}();
         assertEq(1, token.balanceOf(mike));
 
         vm.prank(dog);
-        token.claim{value: 99 ether}();
+        token.mint{value: 99 ether}();
         assertEq(1, token.balanceOf(dog));
 
         vm.prank(cat);
-        token.claim{value: 99 ether}();
+        token.mint{value: 99 ether}();
         assertEq(1, token.balanceOf(cat));
 
         vm.prank(pig);
         vm.expectRevert("MimoFrenzyNFT: Mint closed.");
-        token.claim{value: 99 ether}();
+        token.mint{value: 99 ether}();
         assertEq(0, token.balanceOf(pig));
     }
 
@@ -197,13 +197,13 @@ contract MimoFrenzyNFTTest is Test {
 
         token.stopFreeMint();
         vm.prank(cat);
-        token.claim{value: 99 ether}();
+        token.mint{value: 99 ether}();
         assertEq(1, token.balanceOf(cat));
 
         token.stopMint();
         vm.prank(pig);
         vm.expectRevert("MimoFrenzyNFT: Mint closed.");
-        token.claim{value: 99 ether}();
+        token.mint{value: 99 ether}();
         assertEq(0, token.balanceOf(pig));
 
         proof[0] = 0x33cbd54a90f74462793d081fd0fb9c9a91ac9aa2d52fdf525aace0ccb1909f4c;

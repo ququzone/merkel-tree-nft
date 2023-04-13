@@ -59,7 +59,7 @@ contract MimoFrenzyNFT is Owned, ERC721 {
         _safeMint(account, ++nextTokenId);
     }
 
-    function claim() external payable {
+    function mint() external payable {
         require(!freeMint && !ended && nextTokenId < total, "MimoFrenzyNFT: Mint closed.");
         require(msg.value >= 99 ether, "MimoFrenzyNFT: Too low mint fee.");
 

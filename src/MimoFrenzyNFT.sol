@@ -75,6 +75,11 @@ contract MimoFrenzyNFT is Owned, ERC721 {
         ended = true;
     }
 
+    function withdraw(address payable account) external onlyOwner {
+        require(ended, "MimoFrenzyNFT: Mint not ended.");
+        account.transfer(address(this).balance);
+    }
+
     function tokenURI(
         uint256 /*id*/
     ) public view virtual override returns (string memory) {

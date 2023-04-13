@@ -13,6 +13,7 @@ contract MimoFrenzyNFTTest is Test {
     address internal dog;
     address internal cat;
     address internal pig;
+    address internal admin;
 
     function setUp() public {
         alice = 0x0000001Cc0d120Df09c2CD2f24681B96d1Ddfd64;
@@ -21,6 +22,7 @@ contract MimoFrenzyNFTTest is Test {
         dog = 0xf21afE8a9314B954fFCEAD885bF94eAd74252CB1;
         cat = 0xf23ae3767363a025A6c9a3E6D382875a16f37063;
         pig = 0xf268D98749674eE8523de9996984af7353a615f0;
+        admin = vm.addr(0x1);
         vm.deal(alice, 100 ether);
         vm.deal(bob, 100 ether);
         vm.deal(mike, 100 ether);
@@ -200,7 +202,15 @@ contract MimoFrenzyNFTTest is Test {
         token.mint{value: 99 ether}();
         assertEq(1, token.balanceOf(cat));
 
+        assertEq(0, admin.balance);
+        vm.expectRevert("MimoFrenzyNFT: Mint not ended.");
+        token.withdraw(payable(admin));
+
         token.stopMint();
+
+        token.withdraw(payable(admin));
+        assertEq(99 ether, admin.balance);
+
         vm.prank(pig);
         vm.expectRevert("MimoFrenzyNFT: Mint closed.");
         token.mint{value: 99 ether}();

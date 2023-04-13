@@ -2,19 +2,30 @@
 pragma solidity ^0.8.0;
 
 import {ERC721} from "solmate/src/tokens/ERC721.sol";
+import "solmate/src/auth/Owned.sol";
 import "solmate/src/utils/MerkleProofLib.sol";
 
-contract MimoFrenzyNFT is ERC721 {
+contract MimoFrenzyNFT is Owned, ERC721 {
+    bool public freeMint;
+    bool public ended;
     string private uri;
     uint256 public nextTokenId;
     bytes32 public immutable merkleRoot;
+    uint256 public immutable total;
 
     // This is a packed array of booleans.
     mapping(uint256 => uint256) private claimedBitMap;
 
-    constructor(bytes32 _root, string memory _uri) ERC721("Mimo Frenzy Tribe - Pippi", "MFTP") {
+    constructor(
+        bytes32 _root,
+        string memory _uri,
+        uint256 _total
+    ) Owned(msg.sender) ERC721("Mimo Frenzy Tribe - Pippi", "MFTP") {
         uri = _uri;
         merkleRoot = _root;
+        total = _total;
+        freeMint = true;
+        ended = false;
     }
 
     function isClaimed(uint256 index) public view returns (bool) {
@@ -36,15 +47,32 @@ contract MimoFrenzyNFT is ERC721 {
         address account,
         bytes32[] calldata proof
     ) external {
-        require(!isClaimed(index), "MimoFirst1000: Drop already claimed.");
+        require(freeMint && !ended && nextTokenId < total, "MimoFrenzyNFT: Mint closed.");
+        require(!isClaimed(index), "MimoFrenzyNFT: Drop already claimed.");
 
         // Verify the merkle proof.
         bytes32 node = keccak256(abi.encodePacked(index, account));
-        require(MerkleProofLib.verify(proof, merkleRoot, node), "MimoFirst1000: Invalid proof.");
+        require(MerkleProofLib.verify(proof, merkleRoot, node), "MimoFrenzyNFT: Invalid proof.");
 
         // Mark it claimed and send the token.
         _setClaimed(index);
         _safeMint(account, ++nextTokenId);
+    }
+
+    function claim() external payable {
+        require(!freeMint && !ended && nextTokenId < total, "MimoFrenzyNFT: Mint closed.");
+        require(msg.value >= 99 ether, "MimoFrenzyNFT: Too low mint fee.");
+
+        _safeMint(msg.sender, ++nextTokenId);
+    }
+
+    function stopFreeMint() external onlyOwner {
+        freeMint = false;
+    }
+
+    function stopMint() external onlyOwner {
+        require(!freeMint, "MimoFrenzyNFT: stop free mint first.");
+        ended = true;
     }
 
     function tokenURI(

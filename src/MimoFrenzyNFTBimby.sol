@@ -65,7 +65,7 @@ contract MimoFrenzyNFTBimby is Owned, ERC721 {
         require(!freeMint && !ended && nextTokenId < total, "MimoFrenzyNFT: Mint closed.");
         require(msg.value >= 99 ether, "MimoFrenzyNFT: Too low mint fee.");
         uint256 mintedAmount = userMinted[msg.sender];
-        require(mintedAmount < 11, "MimoFrenzyNFT: Exceed mint limit.");
+        require(mintedAmount < 10, "MimoFrenzyNFT: Exceed mint limit.");
 
         userMinted[msg.sender] = mintedAmount + 1;
         _safeMint(msg.sender, ++nextTokenId);

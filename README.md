@@ -27,8 +27,8 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
   --private-key $PRIVATE_KEY src/MimoFrenzyNFT.sol:MimoFrenzyNFT
 
 // Bimby
-//   testnet - 0xcBc26066Ad90B3e769fCCBa812b837bb5b0dE30a
-//   mainnet - 
+//   testnet - 0x6dce88C23a8bfdb7B27fbD114e32b55FcbB9Cc25
+//   mainnet - 0xAA5314f9ee6A6711e5284508fEC7F40E85969ed6
 forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args "0x28bbf7891cb928989fc4386baa3e06b8960b868634a6bf9aea7c5d63b80ca2e2" "https://nft.iotex.io/tokens/mimo/frenzy_tribe_bimby/metadata.json" 1000 \
   --private-key $PRIVATE_KEY src/MimoFrenzyNFTBimby.sol:MimoFrenzyNFTBimby

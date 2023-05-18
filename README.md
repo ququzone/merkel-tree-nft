@@ -32,4 +32,11 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args "0x28bbf7891cb928989fc4386baa3e06b8960b868634a6bf9aea7c5d63b80ca2e2" "https://nft.iotex.io/tokens/mimo/frenzy_tribe_bimby/metadata.json" 1000 \
   --private-key $PRIVATE_KEY src/MimoFrenzyNFTBimby.sol:MimoFrenzyNFTBimby
+
+// Albie
+// testnet - 0xc1E8351d4A71Ea4FcCFbdE0ca1d7Dc0a1E7E9e64
+// mainnet - 
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args "0x55f8742a265605e92107b88e2d0bc707bcd3e16e210ee92092127998d64dca6b" "https://nft.iotex.io/tokens/mimo/frenzy_tribe_albie/metadata.json" 1000 \
+  --private-key $PRIVATE_KEY src/MimoFrenzyNFTBimby.sol:MimoFrenzyNFTBimby
 ```

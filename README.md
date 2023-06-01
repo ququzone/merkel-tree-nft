@@ -44,7 +44,8 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 ## W3bstream
 
 ```
+// testnet 0x403E9480320D36f697b77f881b773C59f2053fEf
 forge create --legacy --rpc-url $ETH_RPC_URL \
- --constructor-args 1685606400 1685706000 "https://nft.iotex.io/tokens/w3bstream/dev_launch/metadata.json" \
+ --constructor-args 1685608900 1685706000 "https://nft.iotex.io/tokens/w3bstream/dev_launch/metadata.json" \
  --private-key $PRIVATE_KEY src/W3bstreamDevnetLaunch.sol:W3bstreamDevnetLaunch
 ```

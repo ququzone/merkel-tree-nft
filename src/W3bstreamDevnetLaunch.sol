@@ -8,7 +8,7 @@ contract W3bstreamDevnetLaunch is ERC721 {
 
     uint256 public startTime;
     uint256 public endTime;
-    uint256 private nextTokenId;
+    uint256 public total;
     mapping(address => address) private minted;
     string private uri;
 
@@ -24,7 +24,7 @@ contract W3bstreamDevnetLaunch is ERC721 {
         minted[SENTINEL] = address(this);
     }
 
-    function isClaimed(address account) public view returns (bool) {
+    function isMinted(address account) public view returns (bool) {
         return minted[account] != address(0);
     }
 
@@ -34,7 +34,7 @@ contract W3bstreamDevnetLaunch is ERC721 {
         minted[msg.sender] = minted[SENTINEL];
         minted[SENTINEL] = msg.sender;
 
-        _safeMint(msg.sender, ++nextTokenId);
+        _safeMint(msg.sender, ++total);
     }
 
     function tokenURI(uint256) public view virtual override returns (string memory) {

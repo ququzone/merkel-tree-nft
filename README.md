@@ -40,3 +40,11 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args "0x55f8742a265605e92107b88e2d0bc707bcd3e16e210ee92092127998d64dca6b" "https://nft.iotex.io/tokens/mimo/frenzy_tribe_albie/metadata.json" 1000 "Mimo Frenzy Tribe - Albie" "MFTA" \
   --private-key $PRIVATE_KEY src/MimoFrenzyNFTAll.sol:MimoFrenzyNFTAll
 ```
+
+## W3bstream
+
+```
+forge create --legacy --rpc-url $ETH_RPC_URL \
+ --constructor-args 1685606400 1685706000 "https://nft.iotex.io/tokens/w3bstream/dev_launch/metadata.json" \
+ --private-key $PRIVATE_KEY src/W3bstreamDevnetLaunch.sol:W3bstreamDevnetLaunch
+```

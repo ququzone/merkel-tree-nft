@@ -16,12 +16,6 @@ contract MimoFrenzyNFTTest is Test {
     address internal admin;
 
     function setUp() public {
-        token = new W3bstreamDevnetLaunch(
-            1686035899,
-            1686035899,
-            1,
-            address(0),
-            ""
-        );
+        token = new W3bstreamDevnetLaunch(1686035899, 1686035899, 1, address(0), "");
     }
 }

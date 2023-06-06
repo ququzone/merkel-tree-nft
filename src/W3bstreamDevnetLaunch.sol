@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import {ERC721} from "solmate/src/tokens/ERC721.sol";
 
 contract W3bstreamDevnetLaunch is ERC721 {
-    uint256 constant public MAX_MINT = 10;
+    uint256 public constant MAX_MINT = 10;
 
     uint256 public startTime;
     uint256 public endTime;

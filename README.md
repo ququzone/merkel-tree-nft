@@ -45,9 +45,9 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 
 ```
 // testnet 0x5Cf97af7e4fA2aD18fe079B7c6908407739CFDCc
-// mainnet 0x6e7d378444EdA655B607f1Cd5dE774B004116226
+// mainnet 0x8aa9271665e480f0866d2F61FC436B96BF9584AD
 forge create --legacy --rpc-url $ETH_RPC_URL \
- --constructor-args 1686081600 1686513600 100 \
+ --constructor-args 1686168000 1686600000 100 \
    0x4f5Bf4E0606301ac93d568B501E57B7584892D6B \
    "https://nft.iotex.io/tokens/w3bstream/dev_launch/metadata.json" \
  --private-key $PRIVATE_KEY src/W3bstreamDevnetLaunch.sol:W3bstreamDevnetLaunch

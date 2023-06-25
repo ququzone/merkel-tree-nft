@@ -39,6 +39,13 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args "0x55f8742a265605e92107b88e2d0bc707bcd3e16e210ee92092127998d64dca6b" "https://nft.iotex.io/tokens/mimo/frenzy_tribe_albie/metadata.json" 1000 "Mimo Frenzy Tribe - Albie" "MFTA" \
   --private-key $PRIVATE_KEY src/MimoFrenzyNFTAll.sol:MimoFrenzyNFTAll
+
+// Gizzy
+// testnet - 0x13F156F7730aDA5a2Df7f6F377cF559D3f67D25E
+// mainnet - 
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args "0x1f9a6d7b43679b5a7af02c3f43805c79af262ae21889d79fe361b456cbcf2895" "https://nft.iotex.io/tokens/mimo/frenzy_tribe_gizzy/metadata.json" 1000 "Mimo Frenzy Tribe - Gizzy" "MFTG" \
+  --private-key $PRIVATE_KEY src/MimoFrenzyNFTAll.sol:MimoFrenzyNFTAll
 ```
 
 ## W3bstream
@@ -51,4 +58,23 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
    0x4f5Bf4E0606301ac93d568B501E57B7584892D6B \
    "https://nft.iotex.io/tokens/w3bstream/dev_launch/metadata.json" \
  --private-key $PRIVATE_KEY src/W3bstreamDevnetLaunch.sol:W3bstreamDevnetLaunch
+
+forge create --legacy --rpc-url $ETH_RPC_URL \
+ --constructor-args 1686558860 1688600000 1 \
+   0xBD62fB256F6F6a91B6F14716eA538FD2973E5c3b \
+   "https://nft.iotex.io/tokens/w3bstream/dev_launch/metadata.json" \
+ --private-key $PRIVATE_KEY src/W3bstreamDevnetLaunch.sol:W3bstreamDevnetLaunch
+```
+
+## Verify
+
+```
+forge verify-contract --watch --flatten --compiler-version "" --verifier sourcify \
+ --constructor-args $(cast abi-encode "constructor(uint256,uint256,uint256,address,string)" 1686168000 1686600000 100 \
+   0x4f5Bf4E0606301ac93d568B501E57B7584892D6B \
+   "https://nft.iotex.io/tokens/w3bstream/dev_launch/metadata.json") \
+ --verifier-url https://iotexscout.io/api 0x8aa9271665e480f0866d2F61FC436B96BF9584AD \
+   src/W3bstreamDevnetLaunch.sol:W3bstreamDevnetLaunch
+
+forge flatten --output ./Contract.flattened.sol src/W3bstreamDevnetLaunch.sol
 ```

@@ -42,7 +42,7 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 
 // Gizzy
 // testnet - 0x13F156F7730aDA5a2Df7f6F377cF559D3f67D25E
-// mainnet - 
+// mainnet - 0x0689021F9065b18c710f5204e41B3d20C3b7D362
 forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args "0x1f9a6d7b43679b5a7af02c3f43805c79af262ae21889d79fe361b456cbcf2895" "https://nft.iotex.io/tokens/mimo/frenzy_tribe_gizzy/metadata.json" 1000 "Mimo Frenzy Tribe - Gizzy" "MFTG" \
   --private-key $PRIVATE_KEY src/MimoFrenzyNFTAll.sol:MimoFrenzyNFTAll

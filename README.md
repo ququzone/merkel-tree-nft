@@ -78,3 +78,14 @@ forge verify-contract --watch --flatten --compiler-version "" --verifier sourcif
 
 forge flatten --output ./Contract.flattened.sol src/W3bstreamDevnetLaunch.sol
 ```
+
+## Free mint nft
+
+```
+// testnet - 0xccA6b4E205D4dD5c2395b17261789FA991c5975E / 0x9Ad32dCaD664FC8e5b835A9a8E5ec93783E85ACd
+// mainnet - 0x7f37290Ea2D4b25Dc92869Ad127c38dB273dF8EE
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args "Galxe & IoTeX Co-Brand NFT" "GIBT" 1688126400 \
+  "https://nft.iotex.io/tokens/galxe/metadata.json" \
+  --private-key $PRIVATE_KEY src/FreeMintNFT.sol:FreeMintNFT
+```

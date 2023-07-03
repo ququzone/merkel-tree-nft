@@ -82,10 +82,20 @@ forge flatten --output ./Contract.flattened.sol src/W3bstreamDevnetLaunch.sol
 ## Free mint nft
 
 ```
-// testnet - 0xccA6b4E205D4dD5c2395b17261789FA991c5975E / 0x9Ad32dCaD664FC8e5b835A9a8E5ec93783E85ACd
+// testnet - 0xccA6b4E205D4dD5c2395b17261789FA991c5975E / 0x9Ad32dCaD664FC8e5b835A9a8E5ec93783E85ACd / 0xBa26194FdBf724694f823C4b7F2cE45Df55CF412
 // mainnet - 0x7f37290Ea2D4b25Dc92869Ad127c38dB273dF8EE
 forge create --legacy --rpc-url $ETH_RPC_URL \
-  --constructor-args "Galxe & IoTeX Co-Brand NFT" "GIBT" 1688126400 \
+  --constructor-args "Galxe & IoTeX Co-Brand NFT" "GIBT" 1688108000 \
   "https://nft.iotex.io/tokens/galxe/metadata.json" \
   --private-key $PRIVATE_KEY src/FreeMintNFT.sol:FreeMintNFT
+```
+
+## Introducing ZKP wallet
+
+```
+// testnet - 0xA3Ce183b2EA38053f85A160857E6f6A8C10EF5f7
+// mainnet - 
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args "https://nft.iotex.io/tokens/introducing_zkp/metadata.json" \
+  --private-key $PRIVATE_KEY src/ZKPWalletNFT.sol:ZKPWalletNFT
 ```

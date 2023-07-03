@@ -7,7 +7,7 @@ contract FreeMintNFT is ERC721 {
     string private uri;
     uint256 immutable startTime;
     uint256 public nextTokenId;
-    mapping (address => bool) public minted;
+    mapping(address => bool) public minted;
 
     constructor(
         string memory _name,

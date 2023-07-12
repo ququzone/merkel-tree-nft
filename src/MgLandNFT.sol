@@ -14,10 +14,7 @@ contract MgLandNFT is ERC721 {
     uint256 public immutable price = 299 ether;
     address public immutable feeCollector;
 
-    constructor(
-        uint256 _startTime,
-        address _feeCollector
-    ) ERC721("The Mimo Spaceship NFT", "MST") {
+    constructor(uint256 _startTime, address _feeCollector) ERC721("The Mimo Spaceship NFT", "MST") {
         startTime = _startTime;
         endTime = _startTime + 5 days;
         feeCollector = _feeCollector;
@@ -45,7 +42,7 @@ contract MgLandNFT is ERC721 {
                             '", "',
                             'description": "The Mimo Spaceship NFT with MgLand", "',
                             'image":"https://dist.mg.land/nft/spaceship/mimo/base.png"',
-                            '}'
+                            "}"
                         )
                     )
                 )

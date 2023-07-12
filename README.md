@@ -99,3 +99,13 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args "https://nft.iotex.io/tokens/introducing_zkp/metadata.json" \
   --private-key $PRIVATE_KEY src/ZKPWalletNFT.sol:ZKPWalletNFT
 ```
+
+## Mgland NFT
+
+```
+// testnet - 0x8f5b95c1c6d512A67241EdE19918a5C0789e5bcA
+// mainnet - 
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args 1689144600 0xBD62fB256F6F6a91B6F14716eA538FD2973E5c3b \
+  --private-key $PRIVATE_KEY src/MgLandNFT.sol:MgLandNFT
+```

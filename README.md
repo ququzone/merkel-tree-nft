@@ -104,8 +104,8 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 
 ```
 // testnet - 0x8f5b95c1c6d512A67241EdE19918a5C0789e5bcA
-// mainnet - 
+// mainnet - 0x778E131aA8260C1FF78007cAde5e64820744F320
 forge create --legacy --rpc-url $ETH_RPC_URL \
-  --constructor-args 1689144600 0xBD62fB256F6F6a91B6F14716eA538FD2973E5c3b \
+  --constructor-args 1689307200 0x8f00c94d617072c8Adca7B65ad5c87839b623061 \
   --private-key $PRIVATE_KEY src/MgLandNFT.sol:MgLandNFT
 ```

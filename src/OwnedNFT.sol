@@ -21,7 +21,7 @@ contract OwnedNFT is ERC721, Owned {
     }
 
     function batchMint(address[] calldata accounts) external onlyOwner {
-        for (uint i = 0; i < accounts.length; i++) {
+        for (uint256 i = 0; i < accounts.length; i++) {
             _safeMint(accounts[i], ++nextTokenId);
         }
     }

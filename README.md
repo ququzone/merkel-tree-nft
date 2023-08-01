@@ -139,7 +139,8 @@ cast send 0x0Ea30721Ae887d5a5bdd95B36497E345868046D9 "batchMint(address[])" \
 
 ```
 // testnet: 0x15A235808A8A1093b9231aBAa2b7F38e6ce77066
+// mainnet: 0xa7779d7a8d6db241d13dd687A12086c016018feb
 forge create --legacy --rpc-url $ETH_RPC_URL \
-  --constructor-args "https://nft.iotex.io/tokens/badge/"  \
+  --constructor-args "https://badge-cdn.iotex.me/badges/"  \
   --private-key $PRIVATE_KEY src/BadgeSBT.sol:BadgeSBT
 ```

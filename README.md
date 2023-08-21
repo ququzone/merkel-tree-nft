@@ -144,3 +144,12 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args "https://badge-cdn.iotex.me/badges/"  \
   --private-key $PRIVATE_KEY src/BadgeSBT.sol:BadgeSBT
 ```
+
+## Multisender
+
+```
+// mainnet: 0x515E6E78e356F0ee0597a3941295477E143035E0
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args 0 50  \
+  --private-key $PRIVATE_KEY src/multisender/Multisender.sol:Multisender
+```

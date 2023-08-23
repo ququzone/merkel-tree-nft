@@ -20,6 +20,8 @@ contract IllegalRecipient {
     }
 }
 
+contract NoFallback {}
+
 contract MultisenderTest is Test {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Failure(address indexed from, address indexed to, uint256 value);
@@ -35,10 +37,11 @@ contract MultisenderTest is Test {
             recipients1[i] = address(uint160(i + 100000));
         }
 
-        recipients2 = new address[](3);
+        recipients2 = new address[](4);
         recipients2[0] = address(new NormalRecipient());
         recipients2[1] = address(new IllegalRecipient());
-        recipients2[2] = address(10000);
+        recipients2[2] = address(new NoFallback());
+        recipients2[3] = address(10000);
     }
 
     function testToEOA() public {
@@ -56,18 +59,20 @@ contract MultisenderTest is Test {
     }
 
     function testToContract() public {
-        uint256[] memory amounts = new uint256[](3);
+        uint256[] memory amounts = new uint256[](4);
         amounts[0] = 100;
         amounts[1] = 200;
         amounts[2] = 300;
+        amounts[3] = 400;
         assertEq(recipients2[0].balance, 0);
 
         vm.expectEmit(true, true, false, true);
         emit Failure(address(this), recipients2[1], 200);
 
-        sender.sendCoin{value: 600}(recipients2, amounts, "");
+        sender.sendCoin{value: 1000}(recipients2, amounts, "");
         assertEq(recipients2[0].balance, 100);
         assertEq(recipients2[1].balance, 0);
-        assertEq(recipients2[2].balance, 300);
+        assertEq(recipients2[2].balance, 0);
+        assertEq(recipients2[3].balance, 400);
     }
 }

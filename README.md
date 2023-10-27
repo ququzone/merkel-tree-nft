@@ -148,7 +148,7 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 ## Multisender
 
 ```
-// mainnet: 0x515E6E78e356F0ee0597a3941295477E143035E0
+// mainnet: 0x77341ed4AdE3F6077Fc9a8c8426153a51c288A68
 forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args 0 50  \
   --private-key $PRIVATE_KEY src/multisender/Multisender.sol:Multisender

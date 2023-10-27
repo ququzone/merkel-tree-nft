@@ -56,8 +56,8 @@ contract Multisender is Owned, ReentrancyGuard {
             }
             totalAmount += amounts[i];
             require(msg.value >= totalAmount, "insufficient amount");
-            bool ok = payable(recipients[i]).send(amounts[i]);
-            if (ok) {
+            (bool success,)= recipients[i].call{gas: 5000, value: amounts[i]}("");
+            if (success) {
                 emit Transfer(msg.sender, recipients[i], amounts[i]);
             } else {
                 emit Failure(msg.sender, recipients[i], amounts[i]);

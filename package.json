@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "license": "MIT",
     "engines": {
-        "node": "^14.0.0 || ^16.0.0 || ^18.0.0"
+        "node": "^18.0.0 || ^20.0.0"
     },
     "scripts": {
         "clean": "rimraf ./artifacts ./cache ./cache_hardhat ./out",
@@ -31,7 +31,7 @@
         "chai": "^4.3.7",
         "commander": "^10.0.0",
         "ethers": "^5.0.0",
-        "hardhat": "^2.12.7",
+        "hardhat": "^2.19.4",
         "hardhat-gas-reporter": "^1.0.9",
         "prettier": "^2.4.1",
         "prettier-plugin-solidity": "^1.0.0-beta.19",

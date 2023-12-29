@@ -2,10 +2,9 @@
 pragma solidity ^0.8.0;
 
 contract Ownable {
-
     address public owner;
 
-    modifier onlyOwner {
+    modifier onlyOwner() {
         require(isOwner(msg.sender));
         _;
     }
@@ -28,54 +27,54 @@ contract Ownable {
  * @dev Base contract which allows children to implement an emergency stop mechanism.
  */
 contract Pausable is Ownable {
-  event Pause();
-  event Unpause();
+    event Pause();
+    event Unpause();
 
-  bool public paused = false;
+    bool public paused = false;
 
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
 
-  /**
-   * @dev Modifier to make a function callable only when the contract is not paused.
-   */
-  modifier whenNotPaused() {
-    require(!paused);
-    _;
-  }
+    /**
+     * @dev Modifier to make a function callable only when the contract is paused.
+     */
+    modifier whenPaused() {
+        require(paused);
+        _;
+    }
 
-  /**
-   * @dev Modifier to make a function callable only when the contract is paused.
-   */
-  modifier whenPaused() {
-    require(paused);
-    _;
-  }
+    /**
+     * @dev called by the owner to pause, triggers stopped state
+     */
+    function pause() public onlyOwner whenNotPaused {
+        paused = true;
+        emit Pause();
+    }
 
-  /**
-   * @dev called by the owner to pause, triggers stopped state
-   */
-  function pause() onlyOwner whenNotPaused public {
-    paused = true;
-    emit Pause();
-  }
-
-  /**
-   * @dev called by the owner to unpause, returns to normal state
-   */
-  function unpause() onlyOwner whenPaused public {
-    paused = false;
-    emit Unpause();
-  }
+    /**
+     * @dev called by the owner to unpause, returns to normal state
+     */
+    function unpause() public onlyOwner whenPaused {
+        paused = false;
+        emit Unpause();
+    }
 }
 
 interface Verifier {
     function description() external view returns (string memory);
+
     function verify(bytes memory) external returns (bool);
 }
-
 
 interface Register {
     function addrToIdx(address) external view returns (uint256);
 }
+
 /**
  * @title Register delegate details.
  * @author IoTeX Team
@@ -127,20 +126,36 @@ contract DelegateProfile is Pausable {
         return fieldNames.length;
     }
 
-    function getFieldByIndex(uint256 _idx) public view returns (string memory name_, Verifier verifier_, bool deprecated_) {
+    function getFieldByIndex(uint256 _idx)
+        public
+        view
+        returns (
+            string memory name_,
+            Verifier verifier_,
+            bool deprecated_
+        )
+    {
         require(_idx < numOfFields(), "field index out of boundary");
         name_ = fieldNames[_idx];
         verifier_ = fields[name_].verifier;
         deprecated_ = fields[name_].deprecated;
     }
 
-    function getFieldByName(string memory _name) public view returns (Verifier verifier_, bool deprecated_) {
+    function getFieldByName(string memory _name)
+        public
+        view
+        returns (Verifier verifier_, bool deprecated_)
+    {
         require(fields[_name].flag, "undefined field name");
         verifier_ = fields[_name].verifier;
         deprecated_ = fields[_name].deprecated;
     }
 
-    function newFieldInternal(string memory _name, Verifier _verifier, bool _deprecated) internal {
+    function newFieldInternal(
+        string memory _name,
+        Verifier _verifier,
+        bool _deprecated
+    ) internal {
         require(!fields[_name].flag, "duplicate field name");
         fields[_name] = Field(_verifier, _deprecated, true);
         fieldNames.push(_name);
@@ -162,7 +177,11 @@ contract DelegateProfile is Pausable {
         payable(msg.sender).transfer(address(this).balance);
     }
 
-    function updateProfileInternal(address _delegate, string memory _name, bytes memory _value) internal {
+    function updateProfileInternal(
+        address _delegate,
+        string memory _name,
+        bytes memory _value
+    ) internal {
         require(_value.length < 65536, "value too long");
         require(!deprecated(_name), "deprecated field");
         require(fields[_name].verifier.verify(_value), "invalid value");
@@ -170,11 +189,19 @@ contract DelegateProfile is Pausable {
         emit ProfileUpdated(_delegate, _name, _value);
     }
 
-    function updateProfile(string memory _name, bytes memory _value) public onlyRegistered whenNotPaused {
+    function updateProfile(string memory _name, bytes memory _value)
+        public
+        onlyRegistered
+        whenNotPaused
+    {
         updateProfileInternal(msg.sender, _name, _value);
     }
 
-    function updateProfileForDelegate(address _delegate, string memory _name, bytes memory _value) public onlyOwner {
+    function updateProfileForDelegate(
+        address _delegate,
+        string memory _name,
+        bytes memory _value
+    ) public onlyOwner {
         require(_registered(_delegate), "not registered");
         updateProfileInternal(_delegate, _name, _value);
     }
@@ -206,11 +233,18 @@ contract DelegateProfile is Pausable {
         updateProfileWithByteCodeInternal(msg.sender, _byteCode);
     }
 
-    function updateProfileWithByteCodeForDelegate(address _delegate, bytes memory _byteCode) public onlyOwner {
+    function updateProfileWithByteCodeForDelegate(address _delegate, bytes memory _byteCode)
+        public
+        onlyOwner
+    {
         updateProfileWithByteCodeInternal(_delegate, _byteCode);
     }
 
-    function getProfileByField(address _delegate, string memory _field) public view returns (bytes memory) {
+    function getProfileByField(address _delegate, string memory _field)
+        public
+        view
+        returns (bytes memory)
+    {
         require(_registered(_delegate), "not registered");
         return profiles[_delegate][_field];
     }
@@ -241,7 +275,7 @@ contract DelegateProfile is Pausable {
         }
     }
 
-    function toUint(bytes memory _bytes, uint _start) internal pure returns (uint256 retval_) {
+    function toUint(bytes memory _bytes, uint256 _start) internal pure returns (uint256 retval_) {
         require(_bytes.length >= (_start + 32), "invalid byte code");
         // solium-disable-next-line security/no-inline-assembly
         assembly {
@@ -249,7 +283,7 @@ contract DelegateProfile is Pausable {
         }
     }
 
-    function copy(uint _dest, bytes memory _src) internal pure returns (uint256) {
+    function copy(uint256 _dest, bytes memory _src) internal pure returns (uint256) {
         uint256 l = _src.length + 32;
         uint256 offset = 0;
         for (; offset + 32 <= l; offset += 32) {
@@ -258,7 +292,7 @@ contract DelegateProfile is Pausable {
                 mstore(add(_dest, offset), mload(add(_src, offset)))
             }
         }
-        uint256 mask = 256 ** (32 - l % 32) - 1;
+        uint256 mask = 256**(32 - (l % 32)) - 1;
         // solium-disable-next-line security/no-inline-assembly
         assembly {
             let srcpart := and(mload(add(_src, offset)), not(mask))
@@ -268,7 +302,11 @@ contract DelegateProfile is Pausable {
         return _dest + 32 + _src.length;
     }
 
-    function slice(bytes memory _bytes, uint _start, uint _length) internal pure returns (bytes memory) {
+    function slice(
+        bytes memory _bytes,
+        uint256 _start,
+        uint256 _length
+    ) internal pure returns (bytes memory) {
         require(_bytes.length >= (_start + _length), "invalid byte code");
         bytes memory tempBytes;
         // solium-disable-next-line security/no-inline-assembly

@@ -153,3 +153,21 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args 0 50  \
   --private-key $PRIVATE_KEY src/multisender/Multisender.sol:Multisender
 ```
+
+## Gas token
+
+```
+// testnet: 0x670EC5BE7395F0eaf76e527Ef6bd4E3bFdD47A7B
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --private-key $PRIVATE_KEY src/Gas.sol:Gas
+```
+
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args 0x0000000000000000000000000000000000000000  \
+  --private-key $PRIVATE_KEY src/hermes/Delegate.sol:DelegateProfile
+
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --private-key $PRIVATE_KEY src/hermes/DummyVerifier.sol:DummyVerifier
+cast send 0x378270b2a67fE2F0d5269da89aA4f7dF5ec54A37 "newField(string,address)" "foundationRewardPortion" 0xCCDA026cF65EB9CfAc40Db61B90879a4847C9c8A --legacy --private-key=$PRIVATE_KEY
+cast send 0x378270b2a67fE2F0d5269da89aA4f7dF5ec54A37 "newField(string,address)" "epochRewardPortion" 0xCCDA026cF65EB9CfAc40Db61B90879a4847C9c8A --legacy --private-key=$PRIVATE_KEY
+cast send 0x378270b2a67fE2F0d5269da89aA4f7dF5ec54A37 "newField(string,address)" "blockRewardPortion" 0xCCDA026cF65EB9CfAc40Db61B90879a4847C9c8A --legacy --private-key=$PRIVATE_KEY

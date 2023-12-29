@@ -162,6 +162,9 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
   --private-key $PRIVATE_KEY src/Gas.sol:Gas
 ```
 
+## Hermes
+
+```
 forge create --legacy --rpc-url $ETH_RPC_URL \
   --constructor-args 0x0000000000000000000000000000000000000000  \
   --private-key $PRIVATE_KEY src/hermes/Delegate.sol:DelegateProfile
@@ -171,3 +174,23 @@ forge create --legacy --rpc-url $ETH_RPC_URL \
 cast send 0x378270b2a67fE2F0d5269da89aA4f7dF5ec54A37 "newField(string,address)" "foundationRewardPortion" 0xCCDA026cF65EB9CfAc40Db61B90879a4847C9c8A --legacy --private-key=$PRIVATE_KEY
 cast send 0x378270b2a67fE2F0d5269da89aA4f7dF5ec54A37 "newField(string,address)" "epochRewardPortion" 0xCCDA026cF65EB9CfAc40Db61B90879a4847C9c8A --legacy --private-key=$PRIVATE_KEY
 cast send 0x378270b2a67fE2F0d5269da89aA4f7dF5ec54A37 "newField(string,address)" "blockRewardPortion" 0xCCDA026cF65EB9CfAc40Db61B90879a4847C9c8A --legacy --private-key=$PRIVATE_KEY
+```
+
+## IoTeX Fans
+
+```
+// testnet: 0x622D85D86e6cBda0A53A89a5351242Cf9DF2934c
+// mainnet: 0xe12E30dc30E497244A30b87892a1DDa37C7C0144
+forge create --legacy --rpc-url $ETH_RPC_URL \
+  --constructor-args "IoTeX Fans" "IOFS" "https://nft.iotex.io/tokens/fans/"  \
+  --private-key $PRIVATE_KEY src/IoTeXFans.sol:IoTeXFans
+
+// https://iotexscan.io/tx/0x9de86ee5abbd6d380c68b280747ea347c98f7f3ba038639807be70eb5d670b80
+cast send 0xe12E30dc30E497244A30b87892a1DDa37C7C0144 "mint(address)" 0xa0e29a8b968d1caa66203f9c81b25686f7a18f08 --legacy --private-key=$PRIVATE_KEY
+
+// https://iotexscan.io/tx/0x8819c57c6d138703f38d80946b6ec22b5fcdfa5524502c883064577a79936f64
+cast send 0xe12E30dc30E497244A30b87892a1DDa37C7C0144 "mint(address)" 0x99e4e5ff7ae95a66c9548b61f726f4ad85c7e27c --legacy --private-key=$PRIVATE_KEY
+
+// https://iotexscan.io/tx/0xed58d0ad957a0ee594c4e0bfbd5f3ad0c778f0501906c9099f84009043721f95
+cast send 0xe12E30dc30E497244A30b87892a1DDa37C7C0144 "mint(address)" 0x372f9a1f91e53c06a68859e3866d4d16394ee95f --legacy --private-key=$PRIVATE_KEY
+```
